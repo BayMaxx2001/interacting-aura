@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import SessionAddressContractService from './database/SessionAddressContract.service'
 import { CACHE_MANAGER, HttpException, HttpStatus, Inject, Injectable } from '@nestjs/common';
+import {createAccount} from './helpers/aura.helpers'
 @Controller()
 export class AppController {
     constructor(
@@ -15,7 +16,7 @@ export class AppController {
         const funcdata = request.funcdata;
         const queryType = request.queryType;
         const settings = request.settings;
-        const initContractAddress = request.contractAddress; 
+        const initContractAddress = request.contractAddress.addressContract; 
         const appSv = new AppService();
         let result : any = ""
         let sessionAddressContractData;
@@ -37,8 +38,13 @@ export class AppController {
 
     @Post('upload-contract') 
     async uploadContract(@Body() request: any): Promise<any> {
+        const settings = request;
+        console.log(
+            "contract settingss", request
+        );
+        
         const appSv = new AppService();
-        const address = await appSv.InitContractAddress(request.settings);
+        const address = await appSv.InitContractAddress(settings);
         console.log('address-app-controller', address); 
 
         try {
@@ -51,5 +57,10 @@ export class AppController {
             throw new HttpException(`Error:${error}`, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return address;
+    }
+
+    @Post('create-wallet') 
+    async createWallet(): Promise<any> {
+        return await createAccount();
     }
 }

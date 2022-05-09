@@ -34,6 +34,7 @@
     "arraybuffer-to-buffer": "^0.0.7",
     "bip32": "^3.0.1",
     "bip39": "^3.0.4",
+    "js-base64": "^3.7.2",
     "json-schema-defaults": "^0.4.0",
     "json-schema-to-typescript": "^10.1.5",
     "pg": "^8.7.3",

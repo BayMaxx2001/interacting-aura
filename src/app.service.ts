@@ -58,7 +58,8 @@ import { Random } from '@cosmjs/crypto';
 import addressTableService from './database/SessionAddressContract.service'
 import { CACHE_MANAGER, HttpException, HttpStatus, Inject } from '@nestjs/common';
 import { plainToClass } from '@nestjs/class-transformer';
-
+import { createAccount } from './helpers/aura.helpers'
+import * as arrayBufferToBuffer from 'arraybuffer-to-buffer';
 
 const fs = require('fs');
 
@@ -99,11 +100,31 @@ export class AppService {
     contract;
     
     constructor() {
-        const wasmBuffer = fs.readFileSync('./src/flower_store.wasm');
+        // const wasmBuffer = fs.readFileSync('./src/flower_store.wasm');
+        // this.contract = new Uint8Array(wasmBuffer);
+
+        // this.loadWasm(``)
+    
+            // console.log(original_wasmBuffer);
+            // console.log(wasmBuffer);
+    
+        // this.wallet = settings;
+    }
+
+    loadWasm = (base64Wasm: any) => { 
+        const wasm_buffer = Uint8Array.from(
+            atob(base64Wasm),
+            (c) => c.charCodeAt(0),
+        ).buffer;
+        const wasmBuffer = arrayBufferToBuffer(wasm_buffer);
         this.contract = new Uint8Array(wasmBuffer);
     }
 
    async InitContractAddress(settings):Promise<any> {
+
+        this.loadWasm(settings.wasm)
+        console.log("objects settings InitCOntractADdress", settings);
+        
         this.wallet = settings
         const client = await this.getSigningCosmWasmClient();
 
@@ -268,4 +289,5 @@ export class AppService {
               }
             : this.pollForTx(client, txId);
     }
+
 }
