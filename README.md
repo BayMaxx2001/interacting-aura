@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to Aura IDE</h1>
+<h1 align="center">Welcome to Aura IDE smart contract interaction</h1>
 
 # Introduction
 <p>
@@ -7,7 +7,7 @@
 <img alt="Version" src="https://img.shields.io/badge/PostgreSQL-12.10%2B-blue" />
 </p>
 
-This repo use to interact between wasm file and schema smart contract from Aura IDE
+This repo use to interact between wasm file and schema smart contract from Aura IDE Compiler
 
 ## Installation
 
