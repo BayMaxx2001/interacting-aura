@@ -1,8 +1,13 @@
 <h1 align="center">Welcome to Aura IDE</h1>
 
 # Introduction
+<p>
 
-This repo use include upload and interact with smart contract. 
+<img alt="Version" src="https://img.shields.io/badge/Node-v16.15-green" />
+<img alt="Version" src="https://img.shields.io/badge/PostgreSQL-12.10%2B-blue" />
+</p>
+
+This repo use to interact between wasm file and schema smart contract from Aura IDE
 
 ## Installation
 
@@ -22,3 +27,7 @@ Step Run:
 1. Edit file: `database.module.ts` in `src/database` to config database
 2. Run command: `npm install`
 3. Run command `npm run start`
+
+
+# License
+[MIT](https://github.com/aura-nw/flower-store-contract/blob/main/LICENSE) License.
